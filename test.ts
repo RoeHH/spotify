@@ -40,7 +40,7 @@ app
   })
   .get("/i", async (c) => {
     const { code } = c.queryParams as { code: string };
-    const response = await fetch(`https://accounts.spotify.com/api/token`, {
+    const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       body: JSON.stringify({
         grant_type: "authorization_code",
@@ -53,10 +53,7 @@ app
         "Content-Type": "application/json",
       },
     })
-      .then((response) => console.log(response))
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-
+      .then((response) => response.json());
     return response;
   })
   .start({ port: PORT });
