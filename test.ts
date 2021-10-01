@@ -51,8 +51,7 @@ app
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    }).then((x) => console.log(x));
-      //.then((response) => response.json());
+    }).then((response) => response.json());
     
     return response;
   })
