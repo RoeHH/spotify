@@ -12,7 +12,7 @@ console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
 const my_client_id = "084bf4f1acfc46d8b31e9d3783c52e37";
-const redirect_uri = "https://secret-ocean-93187.herokuapp.com/i";
+const redirect_uri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
 app
   .get("/", (res) => {
