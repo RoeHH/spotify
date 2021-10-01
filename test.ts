@@ -51,8 +51,9 @@ app
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    }).then((response) => response.json());
-    
-    return response;
+    })
+      
+    console.log(response);
+    return response.json();
   })
   .start({ port: PORT });
