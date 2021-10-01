@@ -30,5 +30,6 @@ app
   .get("/i?code::code", (c) => {
     const { code } = c.params;
     console.log(code);
+    ":)"
   })
   .start({ port: PORT });
