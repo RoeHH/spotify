@@ -47,11 +47,7 @@ app
     const { code } = c.queryParams as { code: string };
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
-      body: JSON.stringify({
-        grant_type: "test",
-        code: code,
-        redirectUri: redirectUri,
-      }),
+      body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Basic ${new Buffer(
