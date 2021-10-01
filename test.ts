@@ -27,7 +27,7 @@ app
         encodeURIComponent(redirect_uri)
     );
   })
-  .get("/i?code=:code", (c) => {
+  .get("/i", (c) => {
     const { code } = c.params;
     console.log(code);
     ":)"
