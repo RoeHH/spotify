@@ -53,6 +53,7 @@ app
         "Content-Type": "application/json",
       },
     })
+      .then((response) => console.log(response))
       .then((response) => response.json())
       .then((json) => console.log(json));
 
