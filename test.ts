@@ -29,7 +29,7 @@ app
   })
   .get("/i:code", (c) => {
     const { code } = c.params;
-    //console.log(code);
+    console.log(code);
     return "code";
   })
   .start({ port: PORT });
