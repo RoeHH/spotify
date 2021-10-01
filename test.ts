@@ -54,7 +54,7 @@ app
       }),
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${new Buffer.from(`${clientId}:${clientSecret}`)`,
+        'Authorization': "Basic" + new Buffer.from(`${clientId}:${clientSecret}`),
       },
     })
       .then((response) => response.json());
