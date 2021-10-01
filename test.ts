@@ -54,12 +54,10 @@ app
         client_secret: clientSecret,
       }),
       headers: {
-        'Content-Type':'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
     })
-      //.then((response) => response.json())
-      .then((json) => console.log(json));
-
+      .then((response) => response.json());
     return response;
   })
   .start({ port: PORT });
