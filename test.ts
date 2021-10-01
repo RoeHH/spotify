@@ -28,7 +28,7 @@ app
     );
   })
   .get("/i:code", (c) => {
-    //const { code } = c.params;
+    const { code } = c.params;
     //console.log(code);
     return "code";
   })
