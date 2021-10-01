@@ -42,9 +42,6 @@ app
     const { code } = c.queryParams as { code: string };
     const response = await fetch(`https://accounts.spotify.com/api/token`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         grant_type: "authorization_code",
         code: code,
@@ -52,8 +49,13 @@ app
         client_id: myClientId,
         client_secret: clientSecret,
       }),
-    }).then((response) => response.json());
-    console.log(response)
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+
     return response;
   })
   .start({ port: PORT });
