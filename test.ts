@@ -48,7 +48,7 @@ app
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       body: JSON.stringify({
-        grant_type: "authorization_code",
+        grant_type: "test",
         code: code,
         redirectUri: redirectUri,
       }),
