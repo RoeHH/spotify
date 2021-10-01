@@ -53,11 +53,12 @@ app
         redirectUri: redirectUri,
       }),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${new Buffer(`${clientId}:${clientSecret}`)}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Basic ${new Buffer(
+          new TextEncoder().encode(`${clientId}:${clientSecret}`)
+        )}`,
       },
-    })
-      .then((response) => response.json());
+    }).then((response) => response.json());
     return response;
   })
   .start({ port: PORT });
