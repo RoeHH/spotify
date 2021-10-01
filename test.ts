@@ -27,8 +27,8 @@ app
         encodeURIComponent(redirect_uri)
     );
   })
-  .get("/:code", (c) => {
-    const { code } = c.params as { code: string };
+  .get("/i", (c) => {
+    const { code } = c.queryParams as { code: string };
     console.log(code);
     return "code";
   })
