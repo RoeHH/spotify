@@ -28,7 +28,6 @@ console.log(`http://localhost:${PORT}/`);
 
 
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
-let code;
 
 app
   .get("/", (res) => {
@@ -37,7 +36,7 @@ app
       "https://accounts.spotify.com/authorize" +
         "?response_type=code" +
         "&client_id=" +
-        myClientId +
+        ClientId +
         (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
         "&redirect_uri=" +
         encodeURIComponent(redirectUri)
