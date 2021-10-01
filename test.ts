@@ -50,7 +50,7 @@ app
         client_secret: clientSecret,
       }),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-url-encoded",
       },
     })
       //.then((response) => response.json())
