@@ -53,7 +53,9 @@ app
         "Content-Type": "application/json",
       },
     })
-      //.then((response) => response.json());
+      //.then((response) => response.json())
+      .then((json) => console.log(json));
+
     return response;
   })
   .start({ port: PORT });
