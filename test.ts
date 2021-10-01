@@ -10,6 +10,11 @@ if (!clientSecret) {
   logger.error('No "clientSecret" enviroment variable found');
   Deno.exit();
 }
+const clientId = Deno.env.get("clientId");
+if (!clientId) {
+  logger.error('No "clientId" enviroment variable found');
+  Deno.exit();
+}
 
 const app = new Application();
 
@@ -21,7 +26,7 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
-const myClientId = "084bf4f1acfc46d8b31e9d3783c52e37";
+
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 let code;
 
@@ -46,7 +51,7 @@ app
         grant_type: "authorization_code",
         code: code,
         redirectUri: redirectUri,
-        client_id: myClientId,
+        client_id: clientId,
         client_secret: clientSecret,
       }),
       headers: {
