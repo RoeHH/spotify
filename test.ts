@@ -28,7 +28,7 @@ app
     );
   })
   .get("/i:x", (c) => {
-    const { x } = c.params
+    const { x } = c.params as { x: string };
     console.log(x);
     return "code";
   })
