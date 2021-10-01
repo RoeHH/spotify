@@ -27,7 +27,8 @@ app
         encodeURIComponent(redirect_uri)
     );
   })
-  .get("/i", (res) => {
-    await fetch("")
+  .get("/i?code::code", (c) => {
+    const { code } = c.params;
+    console.log(code);
   })
   .start({ port: PORT });
