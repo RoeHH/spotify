@@ -1,0 +1,1 @@
+web: deno run --allow-env --allow-net --allow-read -r ./test.ts --port=$PORT
