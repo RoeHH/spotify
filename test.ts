@@ -56,11 +56,12 @@ app
     const x = await fetch("https://api.spotify.com/v1/me/player/pause", {
       headers: {
         "Accept": "application/json",
+        "Content-length": "1564",
         "Authorization": `Bearer ${response.access_token}`,
         "Content-Type": "application/json",
       },
       method: "PUT",
-    }).then(res => console.log(res));
+    }).then((res) => console.log(res));
     return x;
   })
   .start({ port: PORT });
