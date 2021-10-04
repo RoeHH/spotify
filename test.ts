@@ -31,7 +31,8 @@ const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
 app
   .get("/", (res) => {
-    var scopes = "user-read-private user-read-email";
+    var scopes =
+      "user-read-private user-read-email app-remote-control user-modify-playback-state";
     res.redirect(
       "https://accounts.spotify.com/authorize" +
         "?response_type=code" +
@@ -50,9 +51,16 @@ app
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    })
-      
-    console.log(response);
-    return response.json();
+    }).then((res) => res.json());
+
+    const x = fetch("https://api.spotify.com/v1/me/player/pause", {
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer" + response.access_token,
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+    }).then(res => res.json());
+    return x;
   })
   .start({ port: PORT });
