@@ -2,7 +2,6 @@ import { parse } from "https://deno.land/std@0.100.0/flags/mod.ts";
 import { Application } from "https://deno.land/x/abc@v1.3.1/mod.ts";
 import "https://deno.land/x/dotenv@v3.0.0/load.ts";
 import { Logger } from "https://deno.land/x/loggaby@1.1.3/mod.ts";
-import {Buffer} from "https://deno.land/std@0.109.0/io/buffer.ts";
 
 const logger = new Logger(true);
 
