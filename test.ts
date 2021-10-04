@@ -53,7 +53,7 @@ app
       },
     }).then((res) => res.json());
     console.log(response.access_token);
-    const x = fetch("https://api.spotify.com/v1/me/player/pause", {
+    const x = await fetch("https://api.spotify.com/v1/me/player/pause", {
       headers: {
         Accept: "application/json",
         "content-length": "1564",
