@@ -52,7 +52,7 @@ app
         "Content-Type": "application/x-www-form-urlencoded",
       },
     }).then((res) => res.json());
-
+    console.log(response)
     const x = fetch("https://api.spotify.com/v1/me/player/pause", {
       headers: {
         Accept: "application/json",
