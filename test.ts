@@ -56,7 +56,6 @@ app
     const x = await fetch("https://api.spotify.com/v1/me/player/pause", {
       headers: {
         Accept: "application/json",
-        "content-length": "1564",
         Authorization: `Bearer ${response.access_token}`,
         "Content-Type": "application/json",
       },
