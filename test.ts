@@ -57,7 +57,7 @@ app
       headers: {
         Authorization: `Bearer ${response.access_token}`,
       },
-    }).then((res) => console.log(res));
+    }).then((res) => res.json());
     return x;
   })
   .start({ port: PORT });
