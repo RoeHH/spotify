@@ -47,7 +47,7 @@ app
     const { code } = c.queryParams as { code: string };
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
-      body: `grant_type="authorization_code"&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`,
+      body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=${clientSecret}`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
