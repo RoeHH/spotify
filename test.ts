@@ -52,7 +52,7 @@ app
         "Content-Type": "application/x-www-form-urlencoded",
       },
     }).then((res) => res.json());
-    console.log(response)
+    console.log(response.access_token);
     const x = fetch("https://api.spotify.com/v1/me/player/pause", {
       headers: {
         Accept: "application/json",
@@ -60,7 +60,7 @@ app
         "Content-Type": "application/json",
       },
       method: "PUT",
-    }).then(res => res.json());
+    }).then(res => console.log(res));
     return x;
   })
   .start({ port: PORT });
