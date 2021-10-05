@@ -26,14 +26,14 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
-let refT = "AQChVZFGYgxsbswmZW-k2NSZ31sWnhtbTkO6tI_XyamRFWEK9FZGKujkdv95tJl1_FDhWexOXo0ituREqQ3AVAxT5Uyc705rnMuA-Ts1uGYtMAle5d-DbWVhsjPw5MqVXj4";
+let refT:string;
 
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
 app
   .get("/auth", (res) => {
     var scopes =
-      "user-read-private user-read-email app-remote-control user-modify-playback-state user-library-read";
+      "user-read-private user-read-email app-remote-control user-modify-playback-state user-library-read playlist-modify-public";
     res.redirect(
       "https://accounts.spotify.com/authorize" +
         "?response_type=code" +
@@ -58,6 +58,16 @@ app
     return refT;    
   })
   .get("/build", async (c) => {
+    let resJson = await fetch(`https://api.spotify.com/v1/users/${await getUserId()}/playlists`, {
+      body: "{\"name\":\"HI\",\"description\":\"Test\",\"public\":true}",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+    /*
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
@@ -83,6 +93,7 @@ app
       }
     ).then(res => res.json());
     return audioFeatures;
+    */
   })
   .start({ port: PORT });
 
@@ -97,4 +108,14 @@ async function getToken() {
   })
     .then((res) => res.json())
     .then((resJson) => resJson.access_token);
+}
+
+function getUserId() {
+  fetch("https://api.spotify.com/v1/me", {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((resJson) => resJson.id);
 }
