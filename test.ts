@@ -123,7 +123,7 @@ app
       }
     ).then((res) => res.json());
     
-    return `{"uris": ${dAbleTrackUris}}`;
+    return JSON.stringify(`{"uris": ${dAbleTrackUris}}`);
 
   })
   .start({ port: PORT });
