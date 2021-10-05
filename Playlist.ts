@@ -2,7 +2,7 @@ import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/au
 import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
 
 export class PlayList {
-  private id: string | undefined;
+  public id: string | undefined;
   private userId: number;
   private name: string;
   private description: string;
