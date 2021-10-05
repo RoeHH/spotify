@@ -73,7 +73,7 @@ app
     );
     console.log(audioFeaturePlaylist);
     
-    //await audioFeaturePlaylist.playlist.createPlayList();
+    await audioFeaturePlaylist.playlist.createPlayList();
     console.log(audioFeaturePlaylist);
 
     await audioFeaturePlaylist.addTracks(tracksFromLibary);
