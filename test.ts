@@ -53,7 +53,7 @@ app
       },
     }).then((res) => res.json());
     console.log(response.access_token);
-    const x = await fetch("https://api.spotify.com/v1/me", {
+    const x = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${response.access_token}`,
       },
