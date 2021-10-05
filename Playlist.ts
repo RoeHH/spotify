@@ -9,11 +9,12 @@ export class PlayList {
   private pub: boolean;
 
   constructor(userId: number, name: string, description: string, pub: boolean) {
-    this.id = this.createPlayList();
+    this.id = undefined;
     this.userId = userId;
     this.name = name;
     this.description = description;
     this.pub = pub;
+    this.createPlayList();
   }
 
   /**
@@ -83,8 +84,8 @@ export class PlayList {
       });
   }
 
-  public async createPlayList(): Promise<string> {
-    return await fetch(
+  public async createPlayList(){
+    this.id = await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
         body: `{"name":${this.name},"description":${this.description},"public":${this.pub}`,
