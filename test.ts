@@ -131,7 +131,7 @@ app
         },
         method: "POST",
       }
-    ).then((res) => console.log(res));
+    ).then((res) => res.json());
     
     return resJ;
 
