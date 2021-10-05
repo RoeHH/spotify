@@ -62,6 +62,6 @@ app
     for (const item of x.items) {
       trackIDs[trackIDs.length] = item.id
     }
-    return x;
+    return trackIDs;
   })
   .start({ port: PORT });
