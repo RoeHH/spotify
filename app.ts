@@ -64,20 +64,20 @@ app
         Operator.smaller
       ),
     ];
-    const playList: AudioFeaturePlaylist = new AudioFeaturePlaylist(
+    const audioFeaturePlaylist: AudioFeaturePlaylist = new AudioFeaturePlaylist(
       audioFeatureRules,
       await getUserId(),
       "Hallo",
       "Das isch en Test",
       true
     );
-    console.log(playList.playlist.id);
+    console.log(audioFeaturePlaylist);
     
-    await playList.playlist.createPlayList();
-    console.log(playList);
+    //await audioFeaturePlaylist.playlist.createPlayList();
+    console.log(audioFeaturePlaylist);
 
-    await playList.addTracks(tracksFromLibary);
-    return playList;
+    await audioFeaturePlaylist.addTracks(tracksFromLibary);
+    return audioFeaturePlaylist;
   })
   .start({ port: PORT });
 
