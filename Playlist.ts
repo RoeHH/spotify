@@ -48,20 +48,12 @@ export class PlayList {
 
   /**
    * removeAllTracks
+   * `{"tracks":[${(await this.getTracks()).forEach(track => `{uri":${track.getUri()}"}`)}]}`,
    */
   public async removeAllTracks() {
-    await fetch(
-      "https://api.spotify.com/v1/playlists/1IeESiARFfLTPwXJsWT3no/tracks",
-      {
-        body: `{"tracks":[${(await this.getTracks()).forEach(track => `{uri":${track.getUri()}"}`)}]}`,
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${await Auth.getToken()}`,
-          "Content-Type": "application/json",
-        },
-        method: "DELETE",
+      for (const track of await this.getTracks()) {
+        this.removeTrack(track);
       }
-    );
   }
 
   public async getTracks() {
@@ -102,11 +94,6 @@ export class PlayList {
       }
     )
       .then((res) => res.json())
-      .then(ress => {
-        console.log(ress); console.log(ress.id);
-        
-        return ress
-      })
       .then((resJson) => resJson.id);
   }
 }

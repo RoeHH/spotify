@@ -31,7 +31,7 @@ export class AudioFeaturePlaylist {
       await track.initializeAudioFeatures();
       for (const audioFeatureRule of this.audioFeatureRules) {
         if (audioFeatureRule.challengeTrack(track) == false) {
-          return;
+          continue;
         }
       }
       this.playlist.addTrack(track);

@@ -58,25 +58,19 @@ app
         return tracks;
       });
 
-    const audioFeatureRules: AudioFeatureRule[] = [
-      new AudioFeatureRule(
-        0.5,
-        AudioFeatureType.danceability,
-        Operator.smaller
-      ),
-    ];
     const audioFeaturePlaylist: AudioFeaturePlaylist = new AudioFeaturePlaylist(
-      audioFeatureRules,
+      [
+        new AudioFeatureRule(
+          0.5,
+          AudioFeatureType.danceability,
+          Operator.smaller
+        ),
+      ],
       await getUserId(),
-      "Hallo",
-      "Das isch en Test",
+      "Ned tanzbar",
+      "unter 0.5 uiuiui",
       true
-    );
-    //console.log(audioFeaturePlaylist);
-     
-    await audioFeaturePlaylist.playlist.createPlayList();
-    //console.log(audioFeaturePlaylist);
-
+    )
     await audioFeaturePlaylist.addTracks(tracksFromLibary);
     return audioFeaturePlaylist;
   })
