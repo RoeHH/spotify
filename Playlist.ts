@@ -22,7 +22,7 @@ export class PlayList {
   public async addTrack(tracks: Track[]) {
     let body = {
       tracks: [
-        {}
+        { uri: tracks[0].getUri()}
       ],
     };
 
