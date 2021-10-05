@@ -58,15 +58,18 @@ app
     return refT;    
   })
   .get("/build", async (c) => {
-    let resJson = await fetch(`https://api.spotify.com/v1/users/${await getUserId()}/playlists`, {
-      body: "{\"name\":\"HI\",\"description\":\"Test\",\"public\":true}",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json"
-      },
-      method: "POST"
-    }).then(res => res.json())
+    let resJson = await fetch(
+      `https://api.spotify.com/v1/users/${await getUserId()}/playlists`,
+      {
+        body: '{"name":"HI","description":"Test","public":true}',
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    ).then((res) => res.json());
     return resJson;
     /*
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
