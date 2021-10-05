@@ -71,7 +71,7 @@ app
       "Das isch en Test",
       true
     );
-    await playList.
+    await playList.playlist.createPlayList();
     await playList.addTracks(tracksFromLibary);
     return playList;
   })
