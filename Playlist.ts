@@ -25,10 +25,11 @@ export class PlayList {
         { uri: tracks[0].getUri()}
       ],
     };
-
+/*
     for (const x of tracks) {
       body.tracks[body.tracks.length - 1] = { uri: x.getUri() };
     }
+    */
     console.log(body);
     
     return await fetch(
