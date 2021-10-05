@@ -85,7 +85,7 @@ export class PlayList {
   }
 
   public async createPlayList() {
-    console.log(
+    //console.log(
       `name=${this.name}&description=${this.description}&public=${this.pub}`//`{"name":${this.name},"description":${this.description},"public":${this.pub}}`
     );
     this.id = await fetch(
@@ -101,11 +101,11 @@ export class PlayList {
       }
     )
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         return res.json();
       })
       .then((resJson) => {
-        console.log(resJson);
+        //console.log(resJson);
         return resJson.id;
       });
   }
