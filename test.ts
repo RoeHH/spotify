@@ -108,18 +108,30 @@ app
         return dAbleTracks;
       });
 
+      fetch(
+        "https://api.spotify.com/v1/playlists/7wNhTDjZWSlpLGbD9DbC4w/tracks",
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization:
+              "Bearer BQCjZDlBaPSdX1viZaMb7gZlp6913OVtejxFDrGrSpX-_VbjxYwj4G6v2nLy9Fk_3WPeI3XQaM4SmOpDcjy6LEWVTe_3QHbIgUb5CvfF4IQOXG8doSNh1RXSA_cqCzjqnpDmteKBsfK1xFvvRRMN-MxLhwunb0RgLAvfIt0gVB3e9CmF4djmBuayP7T4mfG83PXvkUrwBjxHnTCs1mmwfOk9qjj3-bZwwxdT0paUR-eMidE",
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        }
+      );
     const resJ = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
-        body: `uris=${dAbleTrackUris}`,
+        body: `{"uris": ${dAbleTrackUris}}`,
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${await getToken()}`,
           "Content-Type": "application/json",
         },
-        method: "POST"
+        method: "POST",
       }
-    ).then(res => console.log(res));
+    ).then((res) => console.log(res));
     
     return resJ;
 
