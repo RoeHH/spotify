@@ -27,7 +27,7 @@ export class PlayList {
     };
 
     for (const x of tracks) {
-      body.tracks[body.tracks.length] = { uri: x.getUri() };
+      body.tracks[body.tracks.length - 1] = { uri: x.getUri() };
     }
     console.log(body);
     
