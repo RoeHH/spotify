@@ -1,39 +1,43 @@
-import { PlayList } from "./playlist.ts";
-import { Track } from "./Track.ts";
-import { AudioFeatureType } from "./AudioFeature.ts";
+import { PlayList } from "https://github.com/RoeHH/spotify/blob/master/playlist.ts";
+import { Track } from "https://github.com/RoeHH/spotify/blob/master/Track.ts";
+import { AudioFeatureType } from "https://github.com/RoeHH/spotify/blob/master/AudioFeature.ts";
 
-export enum Operator{
-    bigger,
-    smaller,
-    equals
+export enum Operator {
+  bigger,
+  smaller,
+  equals,
 }
-
 
 export class AudioFeaturePlaylist {
-    private audioFeatureRules: AudioFeatureRule[] = [];
-    private playlist: PlayList;
-    
-    constructor(audioFeatureRules: AudioFeatureRule[], userId: number, name: string, description: string, pub: boolean,) {
-        this.audioFeatureRules = audioFeatureRules;
-        this.playlist = new PlayList(userId,name,description,pub);
-    }
+  private audioFeatureRules: AudioFeatureRule[] = [];
+  private playlist: PlayList;
 
-    /**
-     * addTracks
-     */
-    public async addTracks(tracks: Track[]) {
-        for (const track of tracks) {
-            await track.initializeAudioFeatures();
-            for (const audioFeatureRule of this.audioFeatureRules) {
-                if (audioFeatureRule.challengeTrack(track) == false) {
-                    return;
-                }
-            }
-            this.playlist.addTrack(track);
+  constructor(
+    audioFeatureRules: AudioFeatureRule[],
+    userId: number,
+    name: string,
+    description: string,
+    pub: boolean
+  ) {
+    this.audioFeatureRules = audioFeatureRules;
+    this.playlist = new PlayList(userId, name, description, pub);
+  }
+
+  /**
+   * addTracks
+   */
+  public async addTracks(tracks: Track[]) {
+    for (const track of tracks) {
+      await track.initializeAudioFeatures();
+      for (const audioFeatureRule of this.audioFeatureRules) {
+        if (audioFeatureRule.challengeTrack(track) == false) {
+          return;
         }
+      }
+      this.playlist.addTrack(track);
     }
+  }
 }
-
 
 export class AudioFeatureRule {
   private value: number;

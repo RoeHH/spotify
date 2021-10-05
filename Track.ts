@@ -1,31 +1,30 @@
-import { TrackAudioFeatures } from "./TrackAudioFeatures.ts";
+import { TrackAudioFeatures } from "https://github.com/RoeHH/spotify/blob/master/TrackAudioFeatures.ts";
 
 export class Track {
-	private id: string;
-	private name: string;
-	public audioFeatures: TrackAudioFeatures;
-	constructor(id: string, name:string) {
-		this.id = id;
-		this.name = name
-		this.audioFeatures = new TrackAudioFeatures(id);
-	}
+  private id: string;
+  private name: string;
+  public audioFeatures: TrackAudioFeatures;
+  constructor(id: string, name: string) {
+    this.id = id;
+    this.name = name;
+    this.audioFeatures = new TrackAudioFeatures(id);
+  }
 
-	/**
-	 * getId
-	 */
-	public getId() {
-		return this.id;
-	}
+  /**
+   * getId
+   */
+  public getId() {
+    return this.id;
+  }
 
-	/**
-	 * getUri
-	 */
-	public getUri() {
-		return `spotify:track:${this.id}`;
-	}
+  /**
+   * getUri
+   */
+  public getUri() {
+    return `spotify:track:${this.id}`;
+  }
 
-	public async initializeAudioFeatures() {
-		await this.audioFeatures.getAudioFeatures();
-	}
+  public async initializeAudioFeatures() {
+    await this.audioFeatures.getAudioFeatures();
+  }
 }
-

@@ -1,5 +1,5 @@
-import * as Auth from "./auth.ts";
-import { Track } from "./Track.ts";
+import * as Auth from "https://github.com/RoeHH/spotify/blob/master/auth.ts";
+import { Track } from "https://github.com/RoeHH/spotify/blob/master/Track.ts";
 
 export class PlayList {
   private id: string;

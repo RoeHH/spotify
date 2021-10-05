@@ -1,10 +1,10 @@
 import { parse } from "https://deno.land/std@0.100.0/flags/mod.ts";
 import { Application } from "https://deno.land/x/abc@v1.3.1/mod.ts";
 import "https://deno.land/x/dotenv@v3.0.0/load.ts";
-import { Track } from "./Track.ts";
-import { AudioFeaturePlaylist, AudioFeatureRule, Operator } from "./AudioFeaturePlaylist.ts";
-import * as Auth from "./auth.ts";
-import { AudioFeature, AudioFeatureType } from "./AudioFeature.ts";
+import { Track } from "https://github.com/RoeHH/spotify/blob/master/Track.ts";
+import { AudioFeaturePlaylist, AudioFeatureRule, Operator } from "https://github.com/RoeHH/spotify/blob/master/AudioFeaturePlaylist.ts";
+import * as Auth from "https://github.com/RoeHH/spotify/blob/master/auth.ts";
+import { AudioFeatureType } from "https://github.com/RoeHH/spotify/blob/master/AudioFeature.ts";
 
 const app = new Application();
 
@@ -35,7 +35,7 @@ app
     await Auth.getRefreshToken(code);
     c.redirect("./build")
   })
-  .get("/build", async (c) => {
+  .get("/build", async () => {
     const tracksFromLibary:Track[] = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${await Auth.getToken()}`,
