@@ -21,7 +21,7 @@ export class PlayList {
    */
   public async addTrack(track: Track) {
     console.log(track.getUri());
-    console.log(this.id +"ahhahahaha")
+    console.log(this.id)
     return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${track.getUri()}`, {
       headers: {
         Accept: "application/json",
@@ -29,7 +29,7 @@ export class PlayList {
         "Content-Type": "application/json",
       },
       method: "POST",
-    }).then(res=>console.log(res));
+    }).then(res=>console.log(res.json()));
   }
 
   /**
