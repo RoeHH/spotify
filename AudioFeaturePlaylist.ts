@@ -10,7 +10,7 @@ export enum Operator {
 
 export class AudioFeaturePlaylist {
   private audioFeatureRules: AudioFeatureRule[] = [];
-  private playlist: PlayList;
+  public playlist: PlayList;
 
   constructor(
     audioFeatureRules: AudioFeatureRule[],

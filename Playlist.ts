@@ -18,16 +18,6 @@ export class PlayList {
   }
 
   /**
-   * getId
-   */
-  public async getId() {
-    if (this.id == "") {
-      this.id = await this.createPlayList();
-    }
-    return this.id;
-  }
-
-  /**
    * addTrack
    */
   public async addTrack(track: Track) {
@@ -94,7 +84,7 @@ export class PlayList {
       });
   }
 
-  private async createPlayList(): Promise<string> {
+  public async createPlayList(): Promise<string> {
     return await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
