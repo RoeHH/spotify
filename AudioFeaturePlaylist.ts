@@ -1,4 +1,4 @@
-import { PlayList } from "https://raw.githubusercontent.com/RoeHH/spotify/master/playlist.ts";
+import { PlayList } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Playlist.ts";
 import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
 import { AudioFeatureType } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
 
