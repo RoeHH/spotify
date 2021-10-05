@@ -62,7 +62,7 @@ app
     for (const item of x.items) {
       console.log(item);
       
-      trackIDs[trackIDs.length] = item.added_at;
+      trackIDs[trackIDs.length] = item;
     }
     return trackIDs;
   })
