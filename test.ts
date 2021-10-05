@@ -65,11 +65,9 @@ app
     }).then((res) => res.json());
     const trackIDs: string[] = [];
     for (const item of x.items) {
-      console.log(item);
-
       trackIDs[trackIDs.length] = item.track.id;
     }
-    return trackIDs;
+    return trackIDs.toString();
   })
   .start({ port: PORT });
 
