@@ -98,6 +98,9 @@ export class PlayList {
       }
     )
       .then((res) => res.json())
-      .then((resJson) => resJson.id);
+      .then((resJson) => {
+        console.log(resJson);
+        return resJson.id;
+      });
   }
 }
