@@ -71,10 +71,10 @@ app
       "Das isch en Test",
       true
     );
-    console.log(audioFeaturePlaylist);
+    //console.log(audioFeaturePlaylist);
     
     await audioFeaturePlaylist.playlist.createPlayList();
-    console.log(audioFeaturePlaylist);
+    //console.log(audioFeaturePlaylist);
 
     await audioFeaturePlaylist.addTracks(tracksFromLibary);
     return audioFeaturePlaylist;
