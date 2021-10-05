@@ -109,7 +109,7 @@ app
       });
 
     const resJ = await fetch(
-      `https://api.spotify.com/v1/playlists/${playlistId}/tracks${dAbleTrackUris}`,
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
         headers: {
           Accept: "application/json",
