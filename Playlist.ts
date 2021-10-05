@@ -9,7 +9,7 @@ export class PlayList {
   private pub: boolean;
 
   constructor(userId: number, name: string, description: string, pub: boolean) {
-    this.id = undefined;
+    this.id = "7jMffH946nJdwHh6bvkXOj";
     this.userId = userId;
     this.name = name;
     this.description = description;
