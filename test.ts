@@ -26,11 +26,12 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
+let refT: string;
 
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
 app
-  .get("/", (res) => {
+  .get("/auth", (res) => {
     var scopes =
       "user-read-private user-read-email app-remote-control user-modify-playback-state user-library-read";
     res.redirect(
@@ -52,18 +53,33 @@ app
         "Content-Type": "application/x-www-form-urlencoded",
       },
     }).then((res) => res.json());
-    console.log(response.access_token);
+    console.log(response.refresh_token);
+    refT = response.refresh_token;
+    
+  })
+  .get("/build", async (c) => {
     const x = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
-        Authorization: `Bearer ${response.access_token}`,
+        Authorization: `Bearer ${await getToken()}`,
       },
     }).then((res) => res.json());
-    const trackIDs:string[] = [];
+    const trackIDs: string[] = [];
     for (const item of x.items) {
       console.log(item);
-      
+
       trackIDs[trackIDs.length] = item;
     }
     return trackIDs;
   })
   .start({ port: PORT });
+
+async function getToken() {
+  return await fetch("https://accounts.spotify.com/api/token", {
+    body: `grant_type=refresh_token&refresh_token=${refT}`,
+    headers: {
+      Authorization: `Basic ${clientId}:${clientSecret}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    method: "POST",
+  });
+}
