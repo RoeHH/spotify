@@ -29,7 +29,7 @@ export class PlayList {
         "Content-Type": "application/json",
       },
       method: "POST",
-    });
+    }).then(res=>console.log(res));
   }
 
   /**
