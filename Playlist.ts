@@ -85,10 +85,6 @@ export class PlayList {
   }
 
   public async createPlayList() {
-    console.log(
-      `name=${this.name}&description=${this.description}&public=${this.pub}`
-    );
-    
     this.id = await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
@@ -105,7 +101,10 @@ export class PlayList {
         method: "POST",
       }
     )
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        return res.json()
+      })
       .then((resJson) => resJson.id);
   }
 }
