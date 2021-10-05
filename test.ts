@@ -67,6 +67,7 @@ app
       },
       method: "POST"
     })
+    return resJson;
     /*
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
