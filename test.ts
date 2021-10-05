@@ -77,9 +77,9 @@ async function getToken() {
   return await fetch("https://accounts.spotify.com/api/token", {
     body: `grant_type=refresh_token&refresh_token=${refT}`,
     headers: {
-      Authorization: `Basic ${clientId}:${clientSecret}`,
+      Authorization: `Basic ${btoa(clientId+":"+clientSecret)}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
     method: "POST",
-  });
+  }).then(res => console.log(res));
 }
