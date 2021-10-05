@@ -26,7 +26,7 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
-let refT: string;
+let refT = "AQChVZFGYgxsbswmZW-k2NSZ31sWnhtbTkO6tI_XyamRFWEK9FZGKujkdv95tJl1_FDhWexOXo0ituREqQ3AVAxT5Uyc705rnMuA-Ts1uGYtMAle5d-DbWVhsjPw5MqVXj4";
 
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
