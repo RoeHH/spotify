@@ -71,6 +71,8 @@ app
       "Das isch en Test",
       true
     );
+    console.log(tracksFromLibary);
+    console.log(playList);
     
     await playList.playlist.createPlayList();
     await playList.addTracks(tracksFromLibary);

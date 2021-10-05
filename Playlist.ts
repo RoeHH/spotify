@@ -2,19 +2,18 @@ import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/au
 import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
 
 export class PlayList {
-  private id: string;
+  private id: string | undefined;
   private userId: number;
   private name: string;
   private description: string;
   private pub: boolean;
 
   constructor(userId: number, name: string, description: string, pub: boolean) {
-    this.id = "";
+    this.id = undefined;
     this.userId = userId;
     this.name = name;
     this.description = description;
     this.pub = pub;
-    this.createPlayList();
   }
 
   /**
