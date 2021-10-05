@@ -105,10 +105,22 @@ app
             dAbleTracks[dAbleTracks.length] = audioFeature.uri;
           }
         }
-        return dAbleTracks;
+        return dAbleTracks.toString();
       });
 
-    return dAbleTrackUris;
+    const resJ = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${dAbleTrackUris}`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${await getToken()}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    ).then(res => res.json());
+    
+    return resJ;
 
   })
   .start({ port: PORT });
