@@ -20,22 +20,29 @@ export class PlayList {
    * addTrack
    */
   public async addTrack(tracks: Track[]) {
-    let uuids = "{tracks:[";
+    let body = {
+      tracks: [
+        {}
+      ],
+    };
+
     for (const x of tracks) {
-      uuids += `{uri:${x.getUri()}}`
+      body.tracks[body.tracks.length] = { uri: x.getUri() };
     }
-    uuids += "]}"
-    console.log(uuids);
+    console.log(body);
     
-    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks`, {
-      body: JSON.stringify(uuids),
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${await Auth.getToken()}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    }).then(res=>console.log(res));
+    return await fetch(
+      `https://api.spotify.com/v1/playlists/${await this.getId()}/tracks`,
+      {
+        body: JSON.stringify(body),
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${await Auth.getToken()}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    ).then((res) => console.log(res));
   }
 
   /**
