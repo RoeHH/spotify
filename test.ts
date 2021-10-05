@@ -58,16 +58,31 @@ app
     return refT;    
   })
   .get("/build", async (c) => {
-    const x = await fetch("https://api.spotify.com/v1/me/tracks", {
+    const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
       },
-    }).then((res) => res.json());
-    const trackIDs: string[] = [];
-    for (const item of x.items) {
-      trackIDs[trackIDs.length] = item.track.id;
-    }
-    return trackIDs.toString();
+    })
+      .then((res) => res.json())
+      .then((resJson) => {
+        const trackIDs:string[] = [];
+        for (const item of resJson.items) {
+          trackIDs[trackIDs.length] = item.track.id;
+        }
+        return trackIDs.toString();
+      });
+    const audioFeatures = await fetch(
+      `https://api.spotify.com/v1/audio-features?ids=${trackIDsString}`,
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization:
+            `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(res => res.json());
+    return trackIDsString;
   })
   .start({ port: PORT });
 
