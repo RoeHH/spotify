@@ -77,7 +77,7 @@ app
         headers: {
           Accept: "application/json",
           Authorization:
-            `Bearer ${getToken()}`,
+            `Bearer ${await getToken()}`,
           "Content-Type": "application/json",
         },
       }
