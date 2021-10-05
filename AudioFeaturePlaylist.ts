@@ -34,7 +34,7 @@ export class AudioFeaturePlaylist {
           continue;
         }
       }
-      this.playlist.addTrack(track);
+      await this.playlist.addTrack(track);
     }
   }
 }
