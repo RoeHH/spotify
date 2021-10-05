@@ -58,8 +58,10 @@ app
         Authorization: `Bearer ${response.access_token}`,
       },
     }).then((res) => res.json());
-      const trackIDs:string[] = [];
+    const trackIDs:string[] = [];
     for (const item of x.items) {
+      console.log(item);
+      
       trackIDs[trackIDs.length] = item.id
     }
     return trackIDs;
