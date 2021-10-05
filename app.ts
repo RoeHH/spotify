@@ -7,6 +7,7 @@ import {
   AudioFeatureRule,
   Operator,
 } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeaturePlaylist.ts";
+import * as Mumopitz from "https://raw.githubusercontent.com/RoeHH/spotify/master/Playlist.ts";
 import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/auth.ts";
 import { AudioFeatureType } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
 
@@ -72,7 +73,7 @@ app
       true
     );
     //console.log(audioFeaturePlaylist);
-    
+     
     await audioFeaturePlaylist.playlist.createPlayList();
     //console.log(audioFeaturePlaylist);
 
