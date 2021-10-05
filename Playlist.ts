@@ -22,9 +22,7 @@ export class PlayList {
   public async addTrack(track: Track) {
     console.log(track.getUri());
     console.log(this.id +"ahhahahaha")
-    this.id = await this.createPlayList();
-    console.log(this.id + "ahhahahaha");
-    return await fetch(`https://api.spotify.com/v1/playlists/${this.id}/tracks?uris=${track.getUri()}`, {
+    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${track.getUri()}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${await Auth.getToken()}`,
@@ -79,7 +77,7 @@ export class PlayList {
       });
   }
 
-  public async createPlayList() {
+  public async getId() {
     if (this.id != undefined) {
       return this.id;
     }
