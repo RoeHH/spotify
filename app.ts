@@ -26,7 +26,7 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
-let refT:string;
+let refT: string;
 
 const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
 
@@ -55,7 +55,7 @@ app
     }).then((res) => res.json());
     console.log(response.refresh_token);
     refT = response.refresh_token;
-    return refT;    
+    return refT;
   })
   .get("/build", async (c) => {
     let playlistId = await fetch(
@@ -71,8 +71,8 @@ app
       }
     )
       .then((res) => res.json())
-      .then(resJson => resJson.id);
-    
+      .then((resJson) => resJson.id);
+
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
@@ -80,13 +80,13 @@ app
     })
       .then((res) => res.json())
       .then((resJson) => {
-        const trackIDs:string[] = [];
+        const trackIDs: string[] = [];
         for (const item of resJson.items) {
           trackIDs[trackIDs.length] = item.track.id;
         }
         return trackIDs.toString();
       });
-    
+
     const dAbleTrackUris = await fetch(
       `https://api.spotify.com/v1/audio-features?ids=${trackIDsString}`,
       {
@@ -109,7 +109,7 @@ app
       });
 
     console.log(JSON.stringify({ uris: dAbleTrackUris }));
-    var raw = JSON.stringify({"uris": dAbleTrackUris})
+    var raw = JSON.stringify({ uris: dAbleTrackUris });
     const resJ = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
@@ -122,9 +122,8 @@ app
         method: "POST",
       }
     ).then((res) => res.json());
-    
-    return resJ;
 
+    return resJ;
   })
   .start({ port: PORT });
 
