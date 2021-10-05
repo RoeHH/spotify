@@ -86,13 +86,13 @@ export class PlayList {
 
   public async createPlayList() {
     console.log(
-      `name="${this.name}"&description="${this.description}"&public="${this.pub}"`
+      `name=${this.name}&description=${this.description}&public=${this.pub}`
     );
     
     this.id = await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
-        body: `name="${this.name}"&description="${this.description}"&public="${this.pub}"`,
+        body: `name=${this.name}&description=${this.description}&public=${this.pub}`,
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${await Auth.getToken()}`,
