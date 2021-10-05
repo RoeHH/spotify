@@ -23,7 +23,8 @@ export class PlayList {
   public async addTrack(track: Track) {
     console.log(track.getUri());
     console.log(this.id +"ahhahahaha")
-    
+    this.id = await this.createPlayList();
+    console.log(this.id + "ahhahahaha");
     await fetch(`https://api.spotify.com/v1/playlists/${this.id}/tracks?uris=${track.getUri()}`, {
       headers: {
         Accept: "application/json",
@@ -80,7 +81,10 @@ export class PlayList {
   }
 
   public async createPlayList() {
-    this.id = await fetch(
+    if (this.id != undefined) {
+      return this.id;
+    }
+    return await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
         body: JSON.stringify({
