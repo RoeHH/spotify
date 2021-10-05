@@ -34,7 +34,7 @@ export class AudioFeaturePlaylist {
           continue;
         }
       }
-      await this.playlist.addTrack(track);
+      let wait = await this.playlist.addTrack(track);
     }
   }
 }
