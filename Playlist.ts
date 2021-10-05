@@ -24,12 +24,13 @@ export class PlayList {
     console.log(tracks);
     let uuids = "{tracks:[";
     for (const x of tracks) {
-      uuids += `{uri:${x.getUri}}`
+      uuids += `{uri:${x.getUri()}}`
     }
     uuids += "]}"
     console.log(uuids);
     
-    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${tracks}`, {
+    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks`, {
+      body: JSON.stringify(uuids),
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${await Auth.getToken()}`,
