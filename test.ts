@@ -59,9 +59,7 @@ app
       },
     }).then((res) => res.json());
       const trackIDs:string[] = [];
-    for (const item of x.items) {
-      trackIDs[trackIDs.length] = item.id
-    }
+      trackIDs[trackIDs.length] = x.items[1].id
     return trackIDs;
   })
   .start({ port: PORT });
