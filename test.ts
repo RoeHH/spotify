@@ -102,7 +102,7 @@ app
         const dAbleTracks: string[] = [];
         for (const audioFeature of resJson.audio_features) {
           if (audioFeature.danceability > 0.5) {
-            dAbleTracks[dAbleTracks.length] = audioFeature.uri;
+            dAbleTracks[dAbleTracks.length] = "\""+audioFeature.uri+"\"";
           }
         }
         return dAbleTracks;
