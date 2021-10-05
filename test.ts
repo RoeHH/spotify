@@ -60,6 +60,6 @@ app
     }).then((res) => res.json());
       const trackIDs:string[] = [];
       trackIDs[trackIDs.length] = x.items[1].id
-    return trackIDs;
+    return x;
   })
   .start({ port: PORT });
