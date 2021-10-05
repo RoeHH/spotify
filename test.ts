@@ -108,8 +108,8 @@ app
         return dAbleTracks;
       });
 
-    console.log(`{"uris": ${dAbleTrackUris}}`);
-    var raw = `{"uris": ${dAbleTrackUris}}`/* JSON.stringify({
+    console.log(JSON.stringify({ uris: dAbleTrackUris }));
+    var raw = JSON.stringify({"uris": dAbleTrackUris})/* JSON.stringify({
       uris: [
         "spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
         "spotify:track:1301WleyT98MSxVHPZCA6M",
