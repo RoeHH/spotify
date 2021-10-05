@@ -114,8 +114,8 @@ async function getToken() {
     .then((resJson) => resJson.access_token);
 }
 
-function getUserId() {
-  fetch("https://api.spotify.com/v1/me", {
+async function getUserId() {
+  return await fetch("https://api.spotify.com/v1/me", {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
