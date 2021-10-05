@@ -66,7 +66,7 @@ app
         "Content-Type": "application/json"
       },
       method: "POST"
-    })
+    }).then(res => res.json())
     return resJson;
     /*
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
