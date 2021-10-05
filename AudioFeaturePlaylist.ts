@@ -34,6 +34,8 @@ export class AudioFeaturePlaylist {
           continue;
         }
       }
+      console.log(track);
+      
       this.playlist.addTrack(track);
     }
   }
