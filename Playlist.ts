@@ -22,7 +22,13 @@ export class PlayList {
   public async addTrack(tracks: Track[]) {
     console.log(this.id)
     console.log(tracks);
-
+    let uuids = "{tracks:[";
+    for (const x of tracks) {
+      uuids += `{uri:${x.getUri}}`
+    }
+    uuids += "]}"
+    console.log(uuids);
+    
     return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${tracks}`, {
       headers: {
         Accept: "application/json",
