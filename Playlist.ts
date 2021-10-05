@@ -14,6 +14,7 @@ export class PlayList {
     this.name = name;
     this.description = description;
     this.pub = pub;
+    this.createPlayList();
   }
 
   /**
