@@ -64,7 +64,7 @@ app
         body: '{"name":"HI","description":"Test","public":true}',
         headers: {
           Accept: "application/json",
-          Authorization: `Bearer ${getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
           "Content-Type": "application/json",
         },
         method: "POST",
@@ -117,7 +117,7 @@ async function getToken() {
 async function getUserId() {
   return await fetch("https://api.spotify.com/v1/me", {
     headers: {
-      Authorization: `Bearer ${getToken()}`,
+      Authorization: `Bearer ${await getToken()}`,
     },
   })
     .then((res) => res.json())
