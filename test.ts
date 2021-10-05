@@ -62,7 +62,7 @@ app
     for (const item of x.items) {
       console.log(item);
       
-      trackIDs[trackIDs.length] = item.id
+      trackIDs[trackIDs.length] = item
     }
     return trackIDs;
   })
