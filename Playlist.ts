@@ -101,9 +101,7 @@ export class PlayList {
         method: "POST",
       }
     )
-      .then((res) => {
-        return res.json()
-      })
+      .then((res) => res.json())
       .then(ress => {
         console.log(ress); console.log(ress.id);
         
