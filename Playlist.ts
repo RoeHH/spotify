@@ -98,7 +98,7 @@ export class PlayList {
       }
     )
       .then((res) => {
-        //console.log(res);
+        console.log(res);
         return res.json();
       })
       .then((resJson) => {
