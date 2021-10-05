@@ -20,8 +20,6 @@ export class PlayList {
    * addTrack
    */
   public async addTrack(tracks: Track[]) {
-    console.log(this.id)
-    console.log(tracks);
     let uuids = "{tracks:[";
     for (const x of tracks) {
       uuids += `{uri:${x.getUri()}}`
