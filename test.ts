@@ -118,7 +118,8 @@ app
         },
         method: "POST",
       }
-    ).then(res => res.json());
+    ).then(res => console.log(res));
+    );
     
     return resJ;
 
