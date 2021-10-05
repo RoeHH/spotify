@@ -102,9 +102,9 @@ export class PlayList {
       }
     )
       .then((res) => {
-        console.log(res.json());
         return res.json()
       })
+      .then(ress => { console.log(ress);return ress})
       .then((resJson) => resJson.id);
   }
 }
