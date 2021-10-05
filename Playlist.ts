@@ -22,7 +22,6 @@ export class PlayList {
    */
   public async addTrack(track: Track) {
     console.log(track.getUri());
-    console.log(this.id);
     
     await fetch(`https://api.spotify.com/v1/playlists/${this.id}/tracks?uris=${track.getUri()}`, {
       headers: {
