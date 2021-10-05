@@ -58,7 +58,7 @@ app
     return refT;    
   })
   .get("/build", async (c) => {
-    let resJson = await fetch(
+    let playlistId = await fetch(
       `https://api.spotify.com/v1/users/${await getUserId()}/playlists`,
       {
         body: '{"name":"HI","description":"Test","public":true}',
@@ -69,9 +69,10 @@ app
         },
         method: "POST",
       }
-    ).then((res) => res.json());
-    return resJson;
-    /*
+    )
+      .then((res) => res.json())
+      .then(resJson => resJson.id);
+    
     const trackIDsString = await fetch("https://api.spotify.com/v1/me/tracks", {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
@@ -85,19 +86,30 @@ app
         }
         return trackIDs.toString();
       });
-    const audioFeatures = await fetch(
+    
+    const dAbleTrackUris = await fetch(
       `https://api.spotify.com/v1/audio-features?ids=${trackIDsString}`,
       {
         headers: {
           Accept: "application/json",
-          Authorization:
-            `Bearer ${await getToken()}`,
+          Authorization: `Bearer ${await getToken()}`,
           "Content-Type": "application/json",
         },
       }
-    ).then(res => res.json());
-    return audioFeatures;
-    */
+    )
+      .then((res) => res.json())
+      .then((resJson) => {
+        const dAbleTracks: string[] = [];
+        for (const audioFeature of resJson.audio_features) {
+          if (audioFeature.danceability > 0.5) {
+            dAbleTracks[dAbleTracks.length] = audioFeature.uri;
+          }
+        }
+        return dAbleTracks;
+      });
+
+    return dAbleTrackUris;
+
   })
   .start({ port: PORT });
 
