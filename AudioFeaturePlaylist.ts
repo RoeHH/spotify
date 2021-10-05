@@ -1,6 +1,6 @@
-import { PlayList } from "https://github.com/RoeHH/spotify/blob/master/playlist.ts";
-import { Track } from "https://github.com/RoeHH/spotify/blob/master/Track.ts";
-import { AudioFeatureType } from "https://github.com/RoeHH/spotify/blob/master/AudioFeature.ts";
+import { PlayList } from "https://raw.githubusercontent.com/RoeHH/spotify/master/playlist.ts";
+import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
+import { AudioFeatureType } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
 
 export enum Operator {
   bigger,

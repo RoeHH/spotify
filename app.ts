@@ -1,10 +1,14 @@
 import { parse } from "https://deno.land/std@0.100.0/flags/mod.ts";
 import { Application } from "https://deno.land/x/abc@v1.3.1/mod.ts";
 import "https://deno.land/x/dotenv@v3.0.0/load.ts";
-import { Track } from "https://github.com/RoeHH/spotify/blob/master/Track.ts";
-import { AudioFeaturePlaylist, AudioFeatureRule, Operator } from "https://github.com/RoeHH/spotify/blob/master/AudioFeaturePlaylist.ts";
-import * as Auth from "https://github.com/RoeHH/spotify/blob/master/auth.ts";
-import { AudioFeatureType } from "https://github.com/RoeHH/spotify/blob/master/AudioFeature.ts";
+import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
+import {
+  AudioFeaturePlaylist,
+  AudioFeatureRule,
+  Operator,
+} from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeaturePlaylist.ts";
+import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/auth.ts";
+import { AudioFeatureType } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
 
 const app = new Application();
 
@@ -33,14 +37,17 @@ app
   .get("/i", async (c) => {
     const { code } = c.queryParams as { code: string };
     await Auth.getRefreshToken(code);
-    c.redirect("./build")
+    c.redirect("./build");
   })
   .get("/build", async () => {
-    const tracksFromLibary:Track[] = await fetch("https://api.spotify.com/v1/me/tracks", {
-      headers: {
-        Authorization: `Bearer ${await Auth.getToken()}`,
-      },
-    })
+    const tracksFromLibary: Track[] = await fetch(
+      "https://api.spotify.com/v1/me/tracks",
+      {
+        headers: {
+          Authorization: `Bearer ${await Auth.getToken()}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((resJson) => {
         const tracks: Track[] = [];
@@ -49,14 +56,25 @@ app
         }
         return tracks;
       });
-      
-    const audioFeatureRules:AudioFeatureRule[] = [new AudioFeatureRule(0.5,AudioFeatureType.danceability,Operator.smaller)]
-    const playList: AudioFeaturePlaylist = new AudioFeaturePlaylist(audioFeatureRules, await getUserId(), "Hallo", "Das isch en Test", true);
+
+    const audioFeatureRules: AudioFeatureRule[] = [
+      new AudioFeatureRule(
+        0.5,
+        AudioFeatureType.danceability,
+        Operator.smaller
+      ),
+    ];
+    const playList: AudioFeaturePlaylist = new AudioFeaturePlaylist(
+      audioFeatureRules,
+      await getUserId(),
+      "Hallo",
+      "Das isch en Test",
+      true
+    );
     playList.addTracks(tracksFromLibary);
     return playList;
   })
   .start({ port: PORT });
-
 
 async function getUserId() {
   return await fetch("https://api.spotify.com/v1/me", {
