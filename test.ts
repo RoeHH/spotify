@@ -55,7 +55,7 @@ app
     }).then((res) => res.json());
     console.log(response.refresh_token);
     refT = response.refresh_token;
-    
+    return refT;    
   })
   .get("/build", async (c) => {
     const x = await fetch("https://api.spotify.com/v1/me/tracks", {
@@ -77,9 +77,11 @@ async function getToken() {
   return await fetch("https://accounts.spotify.com/api/token", {
     body: `grant_type=refresh_token&refresh_token=${refT}`,
     headers: {
-      Authorization: `Basic ${btoa(clientId+":"+clientSecret)}`,
+      Authorization: `Basic ${btoa(clientId + ":" + clientSecret)}`,
       "Content-Type": "application/x-www-form-urlencoded",
     },
     method: "POST",
-  }).then(res => console.log(res));
+  })
+    .then((res) => res.json())
+    .then((resJson) => resJson.access_token);
 }
