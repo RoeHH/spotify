@@ -82,7 +82,7 @@ app
         },
       }
     ).then(res => res.json());
-    return trackIDsString;
+    return audioFeatures;
   })
   .start({ port: PORT });
 
