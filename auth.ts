@@ -30,8 +30,6 @@ export async function getRefreshToken(code: string) {
 }
 
 export async function getToken() {
-  console.log(`grant_type=refresh_token&refresh_token=${refT}`);
-  
   return await fetch("https://accounts.spotify.com/api/token", {
     body: `grant_type=refresh_token&refresh_token=${refT}`,
     headers: {
