@@ -71,7 +71,7 @@ app
       "Das isch en Test",
       true
     );
-    playList.addTracks(tracksFromLibary);
+    await playList.addTracks(tracksFromLibary);
     return playList;
   })
   .start({ port: PORT });
