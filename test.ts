@@ -109,11 +109,17 @@ app
       });
 
     console.log(`{"uris": ${dAbleTrackUris}}`);
-    
+    var raw = JSON.stringify({
+      uris: [
+        "spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
+        "spotify:track:1301WleyT98MSxVHPZCA6M",
+        "spotify:episode:512ojhOuo1ktJprKbVcKyQ",
+      ],
+    });
     const resJ = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
       {
-        body: JSON.stringify(`{uris: [${dAbleTrackUris}]}`),
+        body: raw,//JSON.stringify(`{uris: [${dAbleTrackUris}]}`),
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${await getToken()}`,
