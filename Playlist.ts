@@ -21,7 +21,10 @@ export class PlayList {
    * addTrack
    */
   public async addTrack(track: Track) {
-    fetch(`https://api.spotify.com/v1/playlists/${this.id}/tracks?uris=${track.getUri()}`, {
+    console.log(track.getUri());
+    console.log(this.id);
+    
+    await fetch(`https://api.spotify.com/v1/playlists/${this.id}/tracks?uris=${track.getUri()}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${await Auth.getToken()}`,
