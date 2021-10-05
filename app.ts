@@ -71,7 +71,7 @@ app
       "Das isch en Test",
       true
     );
-    console.log(playList.id);
+    console.log(playList.playlist.id);
     
     await playList.playlist.createPlayList();
     console.log(playList);
