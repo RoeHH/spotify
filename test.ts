@@ -120,7 +120,7 @@ app
           method: "POST",
         }
     );
-    console.log("{"uris`: ${dAbleTrackUris}}`);
+    console.log(`{"uris": ${dAbleTrackUris}}`);
     
     const resJ = await fetch(
       `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
