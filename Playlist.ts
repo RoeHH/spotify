@@ -17,9 +17,9 @@ export class PlayList {
   }
 
   /**
-   * addTracks
+   * addTrack
    */
-  public async addTracks(tracks: Track[]) {
+  public async addTrack(tracks: Track[]) {
     console.log(this.id)
     let uris: string = "";
     for (const t of tracks) {

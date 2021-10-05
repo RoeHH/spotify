@@ -37,7 +37,7 @@ export class AudioFeaturePlaylist {
       }
       validTracks[validTracks.length] = track;
     }
-    await this.playlist.addTracks(validTracks);
+    await this.playlist.addTrack(validTracks);
   }
 }
 
