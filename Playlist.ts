@@ -92,7 +92,11 @@ export class PlayList {
     this.id = await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
-        body: `name=${this.name}&description=${this.description}&public=${this.pub}`,
+        body: JSON.stringify({
+          name: this.name,
+          description: this.description,
+          public: this.pub
+        }),
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${await Auth.getToken()}`,
@@ -101,11 +105,7 @@ export class PlayList {
         method: "POST",
       }
     )
-      .then((res) => 
-        res.json()
-      )
-      .then((resJson) => 
-        resJson.id
-      );
+      .then((res) => res.json())
+      .then((resJson) => resJson.id);
   }
 }
