@@ -19,17 +19,21 @@ export class PlayList {
   /**
    * addTrack
    */
-  public async addTrack(track: Track) {
-    console.log(track.getUri());
+  public async addTrack(tracks: Track[]) {
     console.log(this.id)
-    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${track.getUri()}`, {
+    let uris: string = "";
+    for (const t of tracks) {
+      uris + t.getUri + ",";
+    }
+    console.log(uris);
+    return await fetch(`https://api.spotify.com/v1/playlists/${await this.getId()}/tracks?uris=${uris}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${await Auth.getToken()}`,
         "Content-Type": "application/json",
       },
       method: "POST",
-    }).then(res=>console.log(res.json()));
+    }).then(res=>console.log(res));
   }
 
   /**

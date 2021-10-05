@@ -27,6 +27,7 @@ export class AudioFeaturePlaylist {
    * addTracks
    */
   public async addTracks(tracks: Track[]) {
+    const validTracks:Track[] = []
     for (const track of tracks) {
       await track.initializeAudioFeatures();
       for (const audioFeatureRule of this.audioFeatureRules) {
@@ -34,8 +35,9 @@ export class AudioFeaturePlaylist {
           continue;
         }
       }
-      let wait = await this.playlist.addTrack(track);
+      validTracks[validTracks.length] = track;
     }
+    await this.playlist.addTracks(validTracks);
   }
 }
 
