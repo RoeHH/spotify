@@ -1,6 +1,6 @@
-import { PlayList } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Playlist.ts";
-import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
-import { AudioFeatureType } from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
+import { PlayList } from "./playlist.ts";
+import { Track } from "./Track.ts";
+import { AudioFeatureType } from "./AudioFeature.ts";
 
 export enum Operator {
   bigger,
@@ -27,7 +27,7 @@ export class AudioFeaturePlaylist {
    * addTracks
    */
   public async addTracks(tracks: Track[]) {
-    const validTracks:Track[] = []
+    const validTracks: Track[] = [];
     for (const track of tracks) {
       await track.initializeAudioFeatures();
       for (const audioFeatureRule of this.audioFeatureRules) {
@@ -38,6 +38,13 @@ export class AudioFeaturePlaylist {
       validTracks[validTracks.length] = track;
     }
     await this.playlist.addTrack(validTracks);
+  }
+
+  /**
+   * getPlaylist
+   */
+  public async getPlaylist() {
+    await this.playlist.getId();
   }
 }
 
@@ -83,4 +90,6 @@ export class AudioFeatureRule {
     }
     return false;
   }
+
+
 }

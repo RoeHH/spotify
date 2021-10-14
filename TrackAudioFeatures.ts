@@ -1,8 +1,8 @@
-import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/auth.ts";
+import * as Auth from "./auth.ts";
 import {
   AudioFeature,
   AudioFeatureType,
-} from "https://raw.githubusercontent.com/RoeHH/spotify/master/AudioFeature.ts";
+} from "./AudioFeature.ts";
 
 export class TrackAudioFeatures {
   private trackId: string;

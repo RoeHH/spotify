@@ -1,4 +1,4 @@
-import { TrackAudioFeatures } from "https://raw.githubusercontent.com/RoeHH/spotify/master/TrackAudioFeatures.ts";
+import { TrackAudioFeatures } from "./TrackAudioFeatures.ts";
 
 export class Track {
   private id: string;

@@ -15,7 +15,7 @@ if (!clientId) {
 
 let refT: string;
 
-export const redirectUri = "https://sleepy-taiga-91048.herokuapp.com/i";
+export const redirectUri = "http://localhost:8080/i";
 
 export async function getRefreshToken(code: string) {
   refT = await fetch("https://accounts.spotify.com/api/token", {
@@ -29,8 +29,15 @@ export async function getRefreshToken(code: string) {
     .then((res) => res.refresh_token);
 }
 
+let authToken = "";
+
 export async function getToken() {
-  return await fetch("https://accounts.spotify.com/api/token", {
+  if (authToken != "") {
+    return authToken;
+  }
+  console.log("new auth token");
+  
+  authToken = await fetch("https://accounts.spotify.com/api/token", {
     body: `grant_type=refresh_token&refresh_token=${refT}`,
     headers: {
       Authorization: `Basic ${btoa(clientId + ":" + clientSecret)}`,
@@ -40,4 +47,5 @@ export async function getToken() {
   })
     .then((res) => res.json())
     .then((resJson) => resJson.access_token);
+  return authToken;
 }

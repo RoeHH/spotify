@@ -1,15 +1,14 @@
-import * as Auth from "https://raw.githubusercontent.com/RoeHH/spotify/master/auth.ts";
-import { Track } from "https://raw.githubusercontent.com/RoeHH/spotify/master/Track.ts";
+import * as Auth from "./auth.ts";
+import { Track } from "./Track.ts";
 
 export class PlayList {
-  public id: string | undefined;
+  private id: string | undefined;
   private userId: number;
   private name: string;
   private description: string;
   private pub: boolean;
 
   constructor(userId: number, name: string, description: string, pub: boolean) {
-    this.id = "7jMffH946nJdwHh6bvkXOj";
     this.userId = userId;
     this.name = name;
     this.description = description;
@@ -20,28 +19,29 @@ export class PlayList {
    * addTrack
    */
   public async addTrack(tracks: Track[]) {
-    /*
-    for (const x of tracks) {
-      body.tracks[body.tracks.length - 1] = { uri: x.getUri() };
-    }
-    */
-    
-    return await fetch(
-      `https://api.spotify.com/v1/playlists/${await this.getId()}/tracks`,
-      {
-        body: JSON.stringify({
-          tracks: [
-            { uri: tracks[0].getUri()}
-          ],
-        }),
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${await Auth.getToken()}`,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
+    const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+    await delay(30000);
+    for (let i = 0; i <= Math.ceil(tracks.length / 100); i++) {
+      const uris = [];
+      for (let x = 0; x < 100; x++) {
+        uris[x] = tracks[x + (i*100)].getUri();
       }
-    ).then((res) => console.log(res));
+      await delay(5000);
+      return await fetch(
+        `https://api.spotify.com/v1/playlists/${await this.getId()}/tracks`,
+        {
+          body: JSON.stringify({
+            uris: uris,
+          }),
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${await Auth.getToken()}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        }
+      ).then((res) => console.log(res));
+    }
   }
 
   /**
@@ -93,7 +93,7 @@ export class PlayList {
     if (this.id != undefined) {
       return this.id;
     }
-    return await fetch(
+    this.id = await fetch(
       `https://api.spotify.com/v1/users/${this.userId}/playlists`,
       {
         body: JSON.stringify({
@@ -111,5 +111,6 @@ export class PlayList {
     )
       .then((res) => res.json())
       .then((resJson) => resJson.id);
+    return this.id;
   }
 }
