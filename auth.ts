@@ -31,21 +31,28 @@ export async function getRefreshToken(code: string) {
 
 let authToken = "";
 
-export async function getToken() {
-  if (authToken != "") {
+export async function getToken(requestNew: boolean) {
+  if (requestNew) {
+    await getNewAuthToken();
+  }
+  if (authToken != "" ) {
     return authToken;
   }
-  console.log("new auth token");
-  
-  authToken = await fetch("https://accounts.spotify.com/api/token", {
-    body: `grant_type=refresh_token&refresh_token=${refT}`,
-    headers: {
-      Authorization: `Basic ${btoa(clientId + ":" + clientSecret)}`,
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    method: "POST",
-  })
-    .then((res) => res.json())
+  await getNewAuthToken();
+  return authToken;
+}
+
+async function getNewAuthToken() {
+    console.log("new auth token");
+    authToken = await fetch("https://accounts.spotify.com/api/token", {
+      body: `grant_type=refresh_token&refresh_token=${refT}`,
+      headers: {
+        Authorization: `Basic ${btoa(clientId + ":" + clientSecret)}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      method: "POST",
+    })
+      .then((res) => res.json())
     .then((resJson) => resJson.access_token);
   return authToken;
 }

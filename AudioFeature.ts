@@ -1,15 +1,15 @@
 export enum AudioFeatureType {
-  acousticness,
-  danceability,
-  energy,
-  instrumentalness,
-  liveness,
-  mode,
-  speechiness,
-  valence,
-  tempo,
-  loudness,
-  durationMs,
+  acousticness = "acousticness",
+  danceability = "danceability",
+  energy = "energy",
+  instrumentalness = "instrumentalness",
+  liveness = "liveness",
+  mode = "mode",
+  speechiness = "speechiness",
+  valence = "valence",
+  tempo = "tempo",
+  loudness = "loudness",
+  durationMs = "durationMs",
 }
 
 export class AudioFeature {

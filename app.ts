@@ -7,11 +7,13 @@ import {
   AudioFeatureRule,
   Operator,
 } from "./AudioFeaturePlaylist.ts";
-import * as Auth from "./auth.ts";
+import { spotiFetch } from "./spotiFetch.ts";
 import { AudioFeatureType } from "./AudioFeature.ts";
+import * as Auth from "./auth.ts";
+import { getAudioFeaturePlaylists } from "./audioFeaturePls.ts";
 
 const app = new Application();
-   
+
 const { args } = Deno;
 const DEFAULT_PORT = 8080;
 const argPort = parse(args).port;
@@ -19,8 +21,6 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
-
-
 
 app
   .get("/", (c) => {
@@ -39,36 +39,28 @@ app
   .get("/i", async (c) => {
     const { code } = c.queryParams as { code: string };
     await Auth.getRefreshToken(code);
-    c.redirect("./build");
+    c.redirect("./defBuild");
   })
-  .get("/build", async () => {
+  .get("/defBuild", async (c) => {
     const tracksFromLibary: Track[] = await getUserSavedTracks();
 
     console.log(tracksFromLibary.length);
-    
-    const audioFeaturePlaylist: AudioFeaturePlaylist = new AudioFeaturePlaylist(
-      [
-        new AudioFeatureRule(
-          0.5,
-          AudioFeatureType.danceability,
-          Operator.smaller
-        ),
-      ],
-      await getUserId(),
-      "Ned tanzbar",
-      "unter 0.5 uiuiui",
-      true
-    )
-    await audioFeaturePlaylist.getPlaylist();
-    await audioFeaturePlaylist.addTracks(tracksFromLibary);
-    return audioFeaturePlaylist;
+
+    const audioFeaturePlaylists: AudioFeaturePlaylist[] = getAudioFeaturePlaylists(await getUserId());
+    for (const audioFeaturePlaylist of audioFeaturePlaylists) {
+      await audioFeaturePlaylist.getPlaylist();
+      await audioFeaturePlaylist.addTracks(tracksFromLibary);
+    }
+    c.redirect(
+      audioFeaturePlaylists[0].getURL()
+    );
   })
   .start({ port: PORT });
 
 async function getUserId() {
   return await fetch("https://api.spotify.com/v1/me", {
     headers: {
-      Authorization: `Bearer ${await Auth.getToken()}`,
+      Authorization: `Bearer ${await Auth.getToken(false)}`,
     },
   })
     .then((res) => res.json())
@@ -76,25 +68,27 @@ async function getUserId() {
 }
 
 async function getUserSavedTracks() {
-  const delay = (ms:number) => new Promise((res) => setTimeout(res, ms));
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
   const tracksFromLibary: Track[] = [];
-  const authToken = await Auth.getToken();
-  for (let c = Math.ceil(await getUserSavedTracksCount() / 50); c >= 0; c--){
+  for (let c = Math.ceil((await getUserSavedTracksCount()) / 50); c >= 0; c--) {
     console.log(
-      `https://api.spotify.com/v1/me/tracks?limit=50&offset=${c * 50 }`
+      `https://api.spotify.com/v1/me/tracks?limit=50&offset=${c * 50}`
     );
-    
-    await delay(5000);
 
-    await fetch(`https://api.spotify.com/v1/me/tracks?limit=50&offset=${c*50}`, {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    })
+    //await delay(5000);
+
+    await fetch(
+      `https://api.spotify.com/v1/me/tracks?limit=50&offset=${c * 50}`,
+      {
+        headers: {
+          Authorization: `Bearer ${await Auth.getToken(false)}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((resJson) => {
         console.log(resJson.error);
-        
+
         for (const item of resJson.items) {
           tracksFromLibary[tracksFromLibary.length] = new Track(
             item.track.id,
@@ -106,15 +100,10 @@ async function getUserSavedTracks() {
   return tracksFromLibary;
 }
 
-async function getUserSavedTracksCount():Promise<number> {
-  return await fetch(
+async function getUserSavedTracksCount(): Promise<number> {
+  return await spotiFetch(
     "https://api.spotify.com/v1/me/tracks",
-    {
-      headers: {
-        Authorization: `Bearer ${await Auth.getToken()}`,
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((resJson) => resJson.total);
+    "GET",
+    undefined
+  ).then((resJson) => resJson.total);
 }
