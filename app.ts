@@ -19,6 +19,8 @@ const PORT = argPort ? Number(argPort) : DEFAULT_PORT;
 console.log(`Listening on Port: ${PORT}`);
 console.log(`http://localhost:${PORT}/`);
 
+
+
 app
   .get("/", (c) => {
     var scopes =
