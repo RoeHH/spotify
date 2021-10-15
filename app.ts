@@ -4,11 +4,8 @@ import "https://deno.land/x/dotenv@v3.0.0/load.ts";
 import { Track } from "./Track.ts";
 import {
   AudioFeaturePlaylist,
-  AudioFeatureRule,
-  Operator,
 } from "./AudioFeaturePlaylist.ts";
 import { spotiFetch } from "./spotiFetch.ts";
-import { AudioFeatureType } from "./AudioFeature.ts";
 import * as Auth from "./auth.ts";
 import { getAudioFeaturePlaylists } from "./audioFeaturePls.ts";
 

@@ -1,4 +1,4 @@
-import { PlayList } from "./playlist.ts";
+import { PlayList } from "./Playlist.ts";
 import { Track } from "./Track.ts";
 import { AudioFeatureType } from "./AudioFeature.ts";
 import { spotiFetch } from "./spotiFetch.ts";
